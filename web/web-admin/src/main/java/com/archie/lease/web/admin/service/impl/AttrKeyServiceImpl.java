@@ -3,8 +3,12 @@ package com.archie.lease.web.admin.service.impl;
 import com.archie.lease.model.entity.AttrKey;
 import com.archie.lease.web.admin.mapper.AttrKeyMapper;
 import com.archie.lease.web.admin.service.AttrKeyService;
+import com.archie.lease.web.admin.vo.attr.AttrKeyVo;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -15,6 +19,13 @@ import org.springframework.stereotype.Service;
 public class AttrKeyServiceImpl extends ServiceImpl<AttrKeyMapper, AttrKey>
     implements AttrKeyService{
 
+    @Autowired
+    private AttrKeyMapper attrKeyMapper;
+
+    @Override
+    public List<AttrKeyVo> listAttrInfo() {
+        return attrKeyMapper.listAttrInfo();
+    }
 }
 
 

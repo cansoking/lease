@@ -1,7 +1,10 @@
 package com.archie.lease.web.admin.mapper;
 
 import com.archie.lease.model.entity.AttrKey;
+import com.archie.lease.web.admin.vo.attr.AttrKeyVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface AttrKeyMapper extends BaseMapper<AttrKey> {
 
+    List<AttrKeyVo> listAttrInfo();
 }
 
 
