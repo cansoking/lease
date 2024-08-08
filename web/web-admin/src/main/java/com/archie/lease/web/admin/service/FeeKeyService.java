@@ -1,7 +1,10 @@
 package com.archie.lease.web.admin.service;
 
 import com.archie.lease.model.entity.FeeKey;
+import com.archie.lease.web.admin.vo.fee.FeeKeyVo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -10,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface FeeKeyService extends IService<FeeKey> {
 
+    List<FeeKeyVo> listFeeInfo();
 }
