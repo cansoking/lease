@@ -4,9 +4,13 @@ import com.archie.lease.model.entity.*;
 import com.archie.lease.model.enums.ItemType;
 import com.archie.lease.web.admin.mapper.ApartmentInfoMapper;
 import com.archie.lease.web.admin.service.*;
+import com.archie.lease.web.admin.vo.apartment.ApartmentItemVo;
+import com.archie.lease.web.admin.vo.apartment.ApartmentQueryVo;
 import com.archie.lease.web.admin.vo.apartment.ApartmentSubmitVo;
 import com.archie.lease.web.admin.vo.graph.GraphVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +114,11 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
             }
             apartmentFeeValueService.saveBatch(apartmentFeeValues);
         }
+    }
+
+    @Override
+    public IPage<ApartmentItemVo> pageItem(Page<ApartmentItemVo> page, ApartmentQueryVo queryVo) {
+        return mapper.pageItem(page, queryVo);
     }
 }
 
