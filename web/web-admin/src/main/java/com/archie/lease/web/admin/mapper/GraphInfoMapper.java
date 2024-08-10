@@ -1,7 +1,11 @@
 package com.archie.lease.web.admin.mapper;
 
 import com.archie.lease.model.entity.GraphInfo;
+import com.archie.lease.model.enums.ItemType;
+import com.archie.lease.web.admin.vo.graph.GraphVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface GraphInfoMapper extends BaseMapper<GraphInfo> {
 
+    List<GraphVo> selectListByItemTypeAndId(ItemType itemType, Long id);
 }
 
 

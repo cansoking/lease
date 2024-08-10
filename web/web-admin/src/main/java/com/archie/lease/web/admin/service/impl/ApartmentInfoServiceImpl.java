@@ -2,17 +2,20 @@ package com.archie.lease.web.admin.service.impl;
 
 import com.archie.lease.model.entity.*;
 import com.archie.lease.model.enums.ItemType;
-import com.archie.lease.web.admin.mapper.ApartmentInfoMapper;
+import com.archie.lease.web.admin.mapper.*;
 import com.archie.lease.web.admin.service.*;
+import com.archie.lease.web.admin.vo.apartment.ApartmentDetailVo;
 import com.archie.lease.web.admin.vo.apartment.ApartmentItemVo;
 import com.archie.lease.web.admin.vo.apartment.ApartmentQueryVo;
 import com.archie.lease.web.admin.vo.apartment.ApartmentSubmitVo;
+import com.archie.lease.web.admin.vo.fee.FeeValueVo;
 import com.archie.lease.web.admin.vo.graph.GraphVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.checkerframework.checker.units.qual.A;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -32,6 +35,18 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
 
     @Autowired
     private ApartmentInfoMapper mapper;
+
+    @Autowired
+    private GraphInfoMapper graphInfoMapper;
+
+    @Autowired
+    private LabelInfoMapper labelInfoMapper;
+
+    @Autowired
+    private FacilityInfoMapper facilityInfoMapper;
+
+    @Autowired
+    private FeeValueMapper feeValueMapper;
 
     @Autowired
     private GraphInfoService graphInfoService;
@@ -119,6 +134,28 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
     @Override
     public IPage<ApartmentItemVo> pageItem(Page<ApartmentItemVo> page, ApartmentQueryVo queryVo) {
         return mapper.pageItem(page, queryVo);
+    }
+
+    @Override
+    public ApartmentDetailVo getDetailById(Long id) {
+        ApartmentInfo apartmentInfo = mapper.selectById(id);
+
+        List<GraphVo> graphVoList = graphInfoMapper.selectListByItemTypeAndId(ItemType.APARTMENT, id);
+
+        List<LabelInfo> labelInfos = labelInfoMapper.selectListByApartmentId(id);
+
+        List<FacilityInfo> facilityInfos = facilityInfoMapper.selectListByApartmentId(id);
+
+        List<FeeValueVo> feeValueVos = feeValueMapper.selectListByApartmentId(id);
+
+        ApartmentDetailVo apartmentDetailVo = new ApartmentDetailVo();
+        BeanUtils.copyProperties(apartmentInfo, apartmentDetailVo);
+        apartmentDetailVo.setFacilityInfoList(facilityInfos);
+        apartmentDetailVo.setGraphVoList(graphVoList);
+        apartmentDetailVo.setLabelInfoList(labelInfos);
+        apartmentDetailVo.setFeeValueVoList(feeValueVos);
+
+        return apartmentDetailVo;
     }
 }
 
