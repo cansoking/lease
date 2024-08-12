@@ -1,7 +1,10 @@
 package com.archie.lease.web.admin.mapper;
 
+import com.archie.lease.model.entity.FacilityInfo;
 import com.archie.lease.model.entity.RoomFacility;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface RoomFacilityMapper extends BaseMapper<RoomFacility> {
 
+    List<FacilityInfo> selectListById(Long id);
 }
 
 

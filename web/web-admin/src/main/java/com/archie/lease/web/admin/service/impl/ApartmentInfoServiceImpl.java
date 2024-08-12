@@ -1,5 +1,7 @@
 package com.archie.lease.web.admin.service.impl;
 
+import com.archie.lease.common.exception.LeaseException;
+import com.archie.lease.common.result.ResultCodeEnum;
 import com.archie.lease.model.entity.*;
 import com.archie.lease.model.enums.ItemType;
 import com.archie.lease.web.admin.mapper.*;
@@ -49,6 +51,9 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
     private FeeValueMapper feeValueMapper;
 
     @Autowired
+    private RoomInfoMapper roomInfoMapper;
+
+    @Autowired
     private GraphInfoService graphInfoService;
 
     @Autowired
@@ -87,7 +92,7 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
         }
         // 插入新增或更新后数据
         List<GraphVo> graphVoList = apartmentSubmitVo.getGraphVoList();
-        if(!CollectionUtils.isEmpty(graphVoList)) {
+        if (!CollectionUtils.isEmpty(graphVoList)) {
             ArrayList<GraphInfo> graphInfos = new ArrayList<>();
             for (GraphVo graphVo : graphVoList) {
                 GraphInfo graphInfo = new GraphInfo();
@@ -156,6 +161,38 @@ public class ApartmentInfoServiceImpl extends ServiceImpl<ApartmentInfoMapper, A
         apartmentDetailVo.setFeeValueVoList(feeValueVos);
 
         return apartmentDetailVo;
+    }
+
+    @Override
+    public void removeApartmentById(Long id) {
+
+        LambdaQueryWrapper<RoomInfo> roomInfoLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        roomInfoLambdaQueryWrapper.eq(RoomInfo::getApartmentId, id);
+        Long count = roomInfoMapper.selectCount(roomInfoLambdaQueryWrapper);
+
+        if (count > 0) {
+            throw new LeaseException(ResultCodeEnum.ADMIN_APARTMENT_DELETE_ERROR);
+        }
+
+        super.removeById(id);
+
+        LambdaQueryWrapper<GraphInfo> graphInfoLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        graphInfoLambdaQueryWrapper.eq(GraphInfo::getItemType, ItemType.APARTMENT);
+        graphInfoLambdaQueryWrapper.eq(GraphInfo::getItemId, id);
+        graphInfoService.remove(graphInfoLambdaQueryWrapper);
+
+
+        LambdaQueryWrapper<ApartmentFacility> apartmentFacilityLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        apartmentFacilityLambdaQueryWrapper.eq(ApartmentFacility::getApartmentId, id);
+        apartmentFacilityService.remove(apartmentFacilityLambdaQueryWrapper);
+
+        LambdaQueryWrapper<ApartmentLabel> apartmentLabelLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        apartmentLabelLambdaQueryWrapper.eq(ApartmentLabel::getApartmentId, id);
+        apartmentLabelService.remove(apartmentLabelLambdaQueryWrapper);
+
+        LambdaQueryWrapper<ApartmentFeeValue> apartmentFeeValueLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        apartmentFeeValueLambdaQueryWrapper.eq(ApartmentFeeValue::getApartmentId, id);
+        apartmentFeeValueService.remove(apartmentFeeValueLambdaQueryWrapper);
     }
 }
 

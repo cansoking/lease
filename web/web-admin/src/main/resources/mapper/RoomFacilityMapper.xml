@@ -4,4 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.archie.lease.web.admin.mapper.RoomFacilityMapper">
 
+    <select id="selectListById" resultType="com.archie.lease.model.entity.FacilityInfo">
+        select id,
+               type,
+               name,
+               icon
+        from facility_info
+        where id in (select facility_id from room_facility where room_id = #{id} and is_deleted = 0)
+          and is_deleted = 0
+    </select>
 </mapper>
