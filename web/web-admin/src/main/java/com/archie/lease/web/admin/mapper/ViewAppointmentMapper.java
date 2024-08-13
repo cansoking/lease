@@ -1,7 +1,11 @@
 package com.archie.lease.web.admin.mapper;
 
 import com.archie.lease.model.entity.ViewAppointment;
+import com.archie.lease.web.admin.vo.appointment.AppointmentQueryVo;
+import com.archie.lease.web.admin.vo.appointment.AppointmentVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
 * @author liubo
@@ -11,6 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface ViewAppointmentMapper extends BaseMapper<ViewAppointment> {
 
+    IPage<AppointmentVo> listByPage(Page<AppointmentVo> page, AppointmentQueryVo queryVo);
 }
 
 

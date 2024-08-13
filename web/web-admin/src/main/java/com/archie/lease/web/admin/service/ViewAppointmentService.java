@@ -1,6 +1,10 @@
 package com.archie.lease.web.admin.service;
 
 import com.archie.lease.model.entity.ViewAppointment;
+import com.archie.lease.web.admin.vo.appointment.AppointmentQueryVo;
+import com.archie.lease.web.admin.vo.appointment.AppointmentVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface ViewAppointmentService extends IService<ViewAppointment> {
 
+    IPage<AppointmentVo> listByPage(Page<AppointmentVo> page, AppointmentQueryVo queryVo);
 }

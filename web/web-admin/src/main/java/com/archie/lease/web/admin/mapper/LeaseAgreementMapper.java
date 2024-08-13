@@ -1,7 +1,11 @@
 package com.archie.lease.web.admin.mapper;
 
 import com.archie.lease.model.entity.LeaseAgreement;
+import com.archie.lease.web.admin.vo.agreement.AgreementQueryVo;
+import com.archie.lease.web.admin.vo.agreement.AgreementVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 /**
 * @author liubo
@@ -11,6 +15,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface LeaseAgreementMapper extends BaseMapper<LeaseAgreement> {
 
+    IPage<AgreementVo> pageAgreementVo(Page<AgreementVo> page, AgreementQueryVo queryVo);
 }
 
 
