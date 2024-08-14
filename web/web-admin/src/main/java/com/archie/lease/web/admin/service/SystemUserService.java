@@ -1,6 +1,10 @@
 package com.archie.lease.web.admin.service;
 
 import com.archie.lease.model.entity.SystemUser;
+import com.archie.lease.web.admin.vo.system.user.SystemUserItemVo;
+import com.archie.lease.web.admin.vo.system.user.SystemUserQueryVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -10,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SystemUserService extends IService<SystemUser> {
 
+    IPage<SystemUserItemVo> pageSystemUser(Page<SystemUserItemVo> page, SystemUserQueryVo queryVo);
+
+    SystemUserItemVo selectSystemUserById(Long id);
 }
