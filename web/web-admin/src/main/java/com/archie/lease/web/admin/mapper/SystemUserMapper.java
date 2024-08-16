@@ -1,6 +1,7 @@
 package com.archie.lease.web.admin.mapper;
 
 import com.archie.lease.model.entity.SystemUser;
+import com.archie.lease.web.admin.vo.login.LoginVo;
 import com.archie.lease.web.admin.vo.system.user.SystemUserItemVo;
 import com.archie.lease.web.admin.vo.system.user.SystemUserQueryVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -16,6 +17,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 public interface SystemUserMapper extends BaseMapper<SystemUser> {
 
     IPage<SystemUserItemVo> pageSystemUser(Page<SystemUserItemVo> page, SystemUserQueryVo queryVo);
+
+    SystemUser selectOneUserByUsername(String username);
 }
 
 

@@ -1,11 +1,15 @@
 package com.archie.lease.web.admin.controller.login;
 
 
+import com.archie.lease.common.login.LoginUserHolder;
 import com.archie.lease.common.result.Result;
+import com.archie.lease.common.utils.JwtUtils;
 import com.archie.lease.web.admin.service.LoginService;
 import com.archie.lease.web.admin.vo.login.CaptchaVo;
 import com.archie.lease.web.admin.vo.login.LoginVo;
 import com.archie.lease.web.admin.vo.system.user.SystemUserInfoVo;
+import com.archie.lease.web.admin.vo.system.user.SystemUserItemVo;
+import io.jsonwebtoken.Claims;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +33,15 @@ public class LoginController {
     @Operation(summary = "登录")
     @PostMapping("login")
     public Result<String> login(@RequestBody LoginVo loginVo) {
-        return Result.ok();
+        String jwt = loginService.login(loginVo);
+        return Result.ok(jwt);
     }
 
     @Operation(summary = "获取登陆用户个人信息")
     @GetMapping("info")
     public Result<SystemUserInfoVo> info() {
-        return Result.ok();
+        Long userId = LoginUserHolder.getLoginUser().getUserId();
+        SystemUserInfoVo result = loginService.getLoginUserInfoById(userId);
+        return Result.ok(result);
     }
 }
