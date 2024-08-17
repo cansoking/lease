@@ -1,6 +1,5 @@
 package com.archie.lease.web.admin.service.impl;
 
-import com.archie.lease.common.minio.MinioConfiguration;
 import com.archie.lease.common.minio.MinioProperties;
 import com.archie.lease.web.admin.service.FileService;
 import io.minio.*;

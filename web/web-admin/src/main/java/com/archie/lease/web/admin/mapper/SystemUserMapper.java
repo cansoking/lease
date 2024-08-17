@@ -1,7 +1,6 @@
 package com.archie.lease.web.admin.mapper;
 
 import com.archie.lease.model.entity.SystemUser;
-import com.archie.lease.web.admin.vo.login.LoginVo;
 import com.archie.lease.web.admin.vo.system.user.SystemUserItemVo;
 import com.archie.lease.web.admin.vo.system.user.SystemUserQueryVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

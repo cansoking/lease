@@ -4,7 +4,6 @@ package com.archie.lease.web.admin.controller.apartment;
 import com.archie.lease.common.result.Result;
 import com.archie.lease.model.entity.PaymentType;
 import com.archie.lease.web.admin.service.PaymentTypeService;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

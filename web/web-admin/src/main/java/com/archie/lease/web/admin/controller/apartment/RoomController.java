@@ -5,7 +5,6 @@ import com.archie.lease.common.result.Result;
 import com.archie.lease.model.entity.RoomInfo;
 import com.archie.lease.model.enums.ReleaseStatus;
 import com.archie.lease.web.admin.service.RoomInfoService;
-import com.archie.lease.web.admin.vo.apartment.ApartmentItemVo;
 import com.archie.lease.web.admin.vo.room.RoomDetailVo;
 import com.archie.lease.web.admin.vo.room.RoomItemVo;
 import com.archie.lease.web.admin.vo.room.RoomQueryVo;

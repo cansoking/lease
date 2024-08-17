@@ -1,9 +1,7 @@
 package com.archie.lease.web.admin.custom.interceptor;
 
-import com.archie.lease.common.exception.LeaseException;
 import com.archie.lease.common.login.LoginUser;
 import com.archie.lease.common.login.LoginUserHolder;
-import com.archie.lease.common.result.ResultCodeEnum;
 import com.archie.lease.common.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,7 +1,6 @@
 package com.archie.lease.web.admin.custom.converter;
 
 import com.archie.lease.model.enums.BaseEnum;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 import org.springframework.stereotype.Component;

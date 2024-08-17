@@ -11,8 +11,6 @@ import com.archie.lease.web.admin.service.LoginService;
 import com.archie.lease.web.admin.vo.login.CaptchaVo;
 import com.archie.lease.web.admin.vo.login.LoginVo;
 import com.archie.lease.web.admin.vo.system.user.SystemUserInfoVo;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.wf.captcha.SpecCaptcha;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
