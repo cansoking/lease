@@ -1,7 +1,10 @@
 package com.archie.lease.web.app.mapper;
 
 import com.archie.lease.model.entity.RoomInfo;
+import com.archie.lease.web.app.vo.room.RoomItemVo;
+import com.archie.lease.web.app.vo.room.RoomQueryVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 
 /**
 * @author liubo
@@ -11,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface RoomInfoMapper extends BaseMapper<RoomInfo> {
 
+    IPage<RoomItemVo> getRoomItemPage(IPage<RoomItemVo> page, RoomQueryVo queryVo);
 }

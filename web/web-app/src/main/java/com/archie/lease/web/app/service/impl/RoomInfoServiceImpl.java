@@ -3,8 +3,12 @@ package com.archie.lease.web.app.service.impl;
 import com.archie.lease.web.app.mapper.RoomInfoMapper;
 import com.archie.lease.web.app.service.RoomInfoService;
 import com.archie.lease.model.entity.RoomInfo;
+import com.archie.lease.web.app.vo.room.RoomItemVo;
+import com.archie.lease.web.app.vo.room.RoomQueryVo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,6 +21,13 @@ import org.springframework.stereotype.Service;
 public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
         implements RoomInfoService {
 
+    @Autowired
+    private RoomInfoMapper mapper;
+
+    @Override
+    public IPage<RoomItemVo> getRoomItemPage(IPage<RoomItemVo> page, RoomQueryVo queryVo) {
+        return mapper.getRoomItemPage(page, queryVo);
+    }
 }
 
 
