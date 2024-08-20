@@ -1,7 +1,10 @@
 package com.archie.lease.web.app.mapper;
 
 import com.archie.lease.model.entity.ViewAppointment;
+import com.archie.lease.web.app.vo.appointment.AppointmentItemVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +14,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 public interface ViewAppointmentMapper extends BaseMapper<ViewAppointment> {
 
+    List<AppointmentItemVo> listAppointmentItemVo(Long userId);
 }
 
 

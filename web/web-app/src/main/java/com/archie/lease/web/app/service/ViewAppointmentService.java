@@ -1,7 +1,11 @@
 package com.archie.lease.web.app.service;
 
 import com.archie.lease.model.entity.ViewAppointment;
+import com.archie.lease.web.app.vo.appointment.AppointmentDetailVo;
+import com.archie.lease.web.app.vo.appointment.AppointmentItemVo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -9,4 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-07-26 11:12:39
 */
 public interface ViewAppointmentService extends IService<ViewAppointment> {
+    List<AppointmentItemVo> listAppointmentItemVo(Long userId);
+
+    AppointmentDetailVo getDetailByAppointmentId(Long id);
 }
