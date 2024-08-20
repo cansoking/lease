@@ -1,9 +1,11 @@
 package com.archie.lease.web.app.service.impl;
 
+import com.archie.lease.common.login.LoginUserHolder;
 import com.archie.lease.model.entity.*;
 import com.archie.lease.model.enums.ItemType;
 import com.archie.lease.web.app.mapper.*;
 import com.archie.lease.web.app.service.ApartmentInfoService;
+import com.archie.lease.web.app.service.BrowsingHistoryService;
 import com.archie.lease.web.app.service.RoomInfoService;
 import com.archie.lease.web.app.vo.apartment.ApartmentItemVo;
 import com.archie.lease.web.app.vo.attr.AttrValueVo;
@@ -59,6 +61,9 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
     private ApartmentInfoService apartmentInfoService;
 
     @Autowired
+    private BrowsingHistoryService browsingHistoryService;
+
+    @Autowired
     private RoomInfoMapper mapper;
 
     @Override
@@ -101,6 +106,8 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo>
         roomDetailVo.setPaymentTypeList(paymentTypeList);
         roomDetailVo.setFeeValueVoList(feeValueVoList);
         roomDetailVo.setLeaseTermList(leaseTermList);
+
+        browsingHistoryService.saveHistory(LoginUserHolder.getLoginUser().getUserId(), id);
 
         return roomDetailVo;
     }
