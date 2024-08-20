@@ -1,6 +1,7 @@
 package com.archie.lease.web.app.service;
 
 import com.archie.lease.model.entity.RoomInfo;
+import com.archie.lease.web.app.vo.room.RoomDetailVo;
 import com.archie.lease.web.app.vo.room.RoomItemVo;
 import com.archie.lease.web.app.vo.room.RoomQueryVo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -13,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface RoomInfoService extends IService<RoomInfo> {
     IPage<RoomItemVo> getRoomItemPage(IPage<RoomItemVo> page, RoomQueryVo queryVo);
+
+    RoomDetailVo getDetailById(Long id);
+
+    IPage<RoomItemVo> pageItemByApartmentId(IPage<RoomItemVo> page, Long id);
 }

@@ -6,6 +6,8 @@ import com.archie.lease.web.app.vo.room.RoomQueryVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
+import java.math.BigDecimal;
+
 /**
 * @author liubo
 * @description 针对表【room_info(房间信息表)】的数据库操作Mapper
@@ -15,4 +17,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 public interface RoomInfoMapper extends BaseMapper<RoomInfo> {
 
     IPage<RoomItemVo> getRoomItemPage(IPage<RoomItemVo> page, RoomQueryVo queryVo);
+
+    BigDecimal selectMinRentByApartmentId(Long apartmentId);
+
+    IPage<RoomItemVo> pageItemByApartmentId(IPage<RoomItemVo> page, Long id);
 }
