@@ -1,5 +1,6 @@
 package com.archie.lease.web.admin.service.impl;
 
+import com.archie.lease.common.constant.RedisConstant;
 import com.archie.lease.model.entity.*;
 import com.archie.lease.model.enums.ItemType;
 import com.archie.lease.web.admin.mapper.*;
@@ -16,6 +17,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -71,6 +73,9 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo> i
 
     @Autowired
     private RoomAttrValueService roomAttrValueService;
+
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public IPage<RoomItemVo> pageItem(Page<RoomItemVo> page, RoomQueryVo queryVo) {
@@ -137,6 +142,10 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo> i
         LambdaQueryWrapper<RoomLeaseTerm> roomLeaseTermLambdaQueryWrapper = new LambdaQueryWrapper<>();
         roomLeaseTermLambdaQueryWrapper.eq(RoomLeaseTerm::getRoomId, id);
         roomLeaseTermService.remove(roomLeaseTermLambdaQueryWrapper);
+
+        // 删除缓存
+        String key = RedisConstant.APP_ROOM_PREFIX + id;
+        redisTemplate.delete(key);
     }
 
     @Override
@@ -169,6 +178,10 @@ public class RoomInfoServiceImpl extends ServiceImpl<RoomInfoMapper, RoomInfo> i
             LambdaQueryWrapper<RoomLeaseTerm> roomLeaseTermLambdaQueryWrapper = new LambdaQueryWrapper<>();
             roomLeaseTermLambdaQueryWrapper.eq(RoomLeaseTerm::getRoomId, id);
             roomLeaseTermService.remove(roomLeaseTermLambdaQueryWrapper);
+
+            // 删除缓存
+            String key = RedisConstant.APP_ROOM_PREFIX + roomSubmitVo.getId();
+            redisTemplate.delete(key);
         }
 
         // 更新其他表字段
